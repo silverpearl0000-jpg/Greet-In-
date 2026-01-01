@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const payload = { appUser, recipient, occasion, rating, feedback };
 
-    // 👉 Plugged in your new Web App URL
+    // 👉 Your Web App URL plugged in
     const scriptURL = "https://script.google.com/macros/s/AKfycbw1pwdcMi0ZH4pOX-jVfOslUI2XTJIbGba0o9kVVUucAvarUu25JdVZHzfI23hvFpw/exec";
 
     fetch(scriptURL, {

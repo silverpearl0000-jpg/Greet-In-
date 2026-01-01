@@ -1,5 +1,9 @@
-.hidden { display: none; }
+/* Utility */
+.hidden { 
+  display: none; 
+}
 
+/* Sticky disclaimer */
 #disclaimer {
   position: sticky;
   bottom: 0;
@@ -10,6 +14,41 @@
   font-size: 12px;
 }
 
+/* General section styling */
+section {
+  margin: 20px auto;
+  max-width: 500px;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+section h1, section h2 {
+  margin-bottom: 12px;
+  color: #333;
+}
+
+input, select, textarea, button {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px;
+  margin: 6px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+/* Card preview container */
 #cardContent {
   display: flex;
   justify-content: center;
@@ -17,13 +56,13 @@
   margin: 16px auto;
 }
 
-/* Greeting card with background colour */
+/* Greeting card styling */
 .greeting-card {
   width: 360px;
   height: 220px;
   border: 3px solid #4CAF50;
   border-radius: 14px;
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); /* gradient background */
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,6 +84,16 @@
   color: #444;
 }
 
+/* Download row */
+.download-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Feedback section */
 #feedbackSection {
   margin-top: 20px;
   padding: 15px;
@@ -59,8 +108,11 @@
   margin-bottom: 10px;
   padding: 8px;
   font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
+/* Star rating */
 #starRating span {
   font-size: 26px;
   cursor: pointer;
