@@ -1,7 +1,5 @@
-/* Utility */
 .hidden { display: none; }
 
-/* Sticky disclaimer */
 #disclaimer {
   position: sticky;
   bottom: 0;
@@ -12,7 +10,6 @@
   font-size: 12px;
 }
 
-/* Card container */
 #cardContent {
   display: flex;
   justify-content: center;
@@ -20,13 +17,13 @@
   margin: 16px auto;
 }
 
-/* Styled greeting card */
+/* Greeting card with background colour */
 .greeting-card {
   width: 360px;
   height: 220px;
   border: 3px solid #4CAF50;
   border-radius: 14px;
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); /* gradient background */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,14 +45,6 @@
   color: #444;
 }
 
-/* Download row */
-.download-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-/* Feedback section */
 #feedbackSection {
   margin-top: 20px;
   padding: 15px;
@@ -72,7 +61,6 @@
   font-size: 14px;
 }
 
-/* Star rating */
 #starRating span {
   font-size: 26px;
   cursor: pointer;

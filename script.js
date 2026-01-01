@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Elements
   const appUserInput = document.getElementById('appUser');
   const onboardBtn = document.getElementById('onboardBtn');
   const welcome = document.getElementById('welcome');
@@ -18,22 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const starRating = document.getElementById('starRating');
   const submitFeedback = document.getElementById('submitFeedback');
 
-  // State
-  let appUser = "";
-  let occasion = "";
-  let recipient = "";
+  let appUser = "", occasion = "", recipient = "";
 
-  // Step 1: Onboarding
+  // Onboarding
   onboardBtn.addEventListener('click', () => {
-    const name = appUserInput.value.trim();
-    if (!name) { alert('Enter your name'); return; }
-    appUser = name;
+    if (!appUserInput.value.trim()) { alert('Enter your name'); return; }
+    appUser = appUserInput.value.trim();
     document.getElementById('onboarding').classList.add('hidden');
     welcome.classList.remove('hidden');
     welcomeMsg.textContent = `Welcome, ${appUser}! 🎉`;
   });
 
-  // Step 2: Occasion selection
+  // Occasion selection
   occasionBtn.addEventListener('click', () => {
     welcome.classList.add('hidden');
     occasionSection.classList.remove('hidden');
@@ -47,11 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
     recipientSection.classList.remove('hidden');
   });
 
-  // Step 3: Recipient input + card generation
+  // Recipient + card generation
   generateCardBtn.addEventListener('click', () => {
-    const name = recipientNameInput.value.trim();
-    if (!name) { alert("Enter recipient's name!"); return; }
-    recipient = name;
+    recipient = recipientNameInput.value.trim();
+    if (!recipient) { alert("Enter recipient's name!"); return; }
 
     let message;
     if (occasion === 'New Year') {
@@ -67,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     recipientSection.classList.add('hidden');
     cardPreview.classList.remove('hidden');
 
-    // Render styled card
     cardContent.innerHTML = `
       <div class="greeting-card" id="cardCanvas">
         <h2>${message}</h2>
@@ -77,13 +70,13 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   });
 
-  // Step 4: Download card (PNG/PDF) + show feedback
+  // Download + show feedback
   downloadBtn.addEventListener('click', () => {
     const format = formatSelect.value;
-    const cardEl = document.getElementById('cardCanvas'); // capture the styled card only
+    const cardEl = document.getElementById('cardCanvas');
     if (!cardEl) { alert('No card to download. Generate first.'); return; }
 
-    html2canvas(cardEl, { backgroundColor: null }).then(canvas => {
+    html2canvas(cardEl).then(canvas => {
       if (format === "PNG") {
         const link = document.createElement('a');
         link.download = "greeting-card.png";
@@ -91,23 +84,19 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
       } else {
         const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF({ unit: 'pt', format: 'a4' });
+        const pdf = new jsPDF();
         const imgData = canvas.toDataURL("image/png");
-        const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-        const imgWidth = Math.min(pageWidth - 40, canvas.width);
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        const x = (pageWidth - imgWidth) / 2;
-        const y = (pageHeight - imgHeight) / 2;
-        pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         pdf.save("greeting-card.pdf");
       }
-      // Reveal feedback section after download
       feedbackSection.classList.remove('hidden');
-    }).catch(err => alert('Download failed: ' + err));
+    });
   });
 
-  // Step 5: Star rating
+  // Star rating
   starRating.addEventListener('click', (e) => {
     if (e.target.tagName !== 'SPAN') return;
     const index = [...starRating.children].indexOf(e.target);
@@ -116,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Step 6: Submit feedback to Google Sheets
+  // Submit feedback
   submitFeedback.addEventListener('click', () => {
     const feedback = suggestionBox.value.trim();
     const rating = [...starRating.children].filter(star => star.classList.contains('active')).length;
@@ -128,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const payload = { appUser, recipient, occasion, rating, feedback };
 
-    // Replace with your actual Apps Script Web App URL if different
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwl6qoGclL4wEkw2B1ndi_BeHtp0Q9pmcQ9eDZZ2fRB-I7zv9WREgase6TjBHo4iIQ/exec";
+    // 👉 Plugged in your new Web App URL
+    const scriptURL = "https://script.google.com/macros/s/AKfycbw1pwdcMi0ZH4pOX-jVfOslUI2XTJIbGba0o9kVVUucAvarUu25JdVZHzfI23hvFpw/exec";
 
     fetch(scriptURL, {
       method: "POST",
