@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 📝 Submit feedback → Google Sheets
+  // 📝 Submit feedback → Gmail via Apps Script
   submitFeedback.addEventListener('click', () => {
     const feedback = suggestionBox.value.trim();
     const rating = [...starRating.children].filter(star => star.classList.contains('active')).length;
@@ -132,14 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
       feedback 
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbzmruYQTz0tcaHvdtP7RjJlG_5dsLaaVIyOL9Igc6cE6asoN6k6ChfJ_KHu596pboo/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbzbZciOKny-t7Dg0_kycQmbPBkzvcCVkb0FTXQO_0TjGKvsrECOLC9qFV1af9taEA4/exec", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: { "Content-Type": "application/json" }
     })
     .then(res => res.json())
     .then(data => {
-      alert("Feedback submitted!");
+      alert("Feedback submitted! Check your Gmail inbox.");
       suggestionBox.value = '';
       [...starRating.children].forEach(star => star.classList.remove('active'));
       feedbackSection.classList.add('hidden');
