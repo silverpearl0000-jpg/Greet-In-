@@ -1,54 +1,63 @@
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #ffecd2, #fcb69f);
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  margin: 0;
   text-align: center;
   padding: 2rem;
-  margin: 0;
 }
 
-.hidden {
-  display: none;
+.hidden { display: none; }
+
+.container section { margin: 2rem 0; }
+
+input, button, select, textarea {
+  padding: 0.75rem;
+  margin: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
 }
 
-.welcome h1 {
-  font-size: 2.5rem;
-  color: #6200ea;
-  animation: bounce 2s infinite;
+button {
+  background: #6200ea;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
+button:hover { background: #3700b3; }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  margin-top: 2rem;
-}
-
-button {
-  padding: 1rem;
-  font-size: 1rem;
-  background: #6200ea;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background: #3700b3;
 }
 
 .card {
-  margin-top: 2rem;
-  padding: 2rem;
   background: white;
+  padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  font-size: 1.5rem;
-  color: #333;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-size: 1.4rem;
+}
+
+#starRating span {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ccc;
+}
+#starRating span.active { color: gold; }
+
+.confetti {
+  height: 100px;
+  background: repeating-linear-gradient(
+    45deg,
+    #ff0000, #ff0000 10px,
+    #00ff00 10px, #00ff00 20px,
+    #0000ff 20px, #0000ff 30px
+  );
+  animation: move 2s infinite linear;
+}
+@keyframes move {
+  from { background-position: 0 0; }
+  to { background-position: 100px 100px; }
 }
