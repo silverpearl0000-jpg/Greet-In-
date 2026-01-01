@@ -7,19 +7,27 @@
 </head>
 <body>
   <div class="welcome">
-    <h1>🎉 Welcome to Greet In 🎉</h1>
-    <p>Choose your occasion to create a greeting card:</p>
+    <h1 id="animatedName">🎉 Welcome to Greet In 🎉</h1>
+    <p>Enter your name to start:</p>
+    <input type="text" id="userName" placeholder="Your name here">
+    <button onclick="startGreeting()">Start</button>
+  </div>
+
+  <div id="occasionSection" class="hidden">
+    <h2>Select an Occasion</h2>
     <div class="grid">
-      <button onclick="selectOccasion('Happy Birthday')">Happy Birthday</button>
+      <button onclick="selectOccasion('Birthday')">Birthday</button>
       <button onclick="selectOccasion('New Year')">New Year</button>
-      <button onclick="selectOccasion('Eid')">Eid</button>
-      <button onclick="selectOccasion('Diwali')">Diwali</button>
-      <button onclick="selectOccasion('Holi')">Holi</button>
       <button onclick="selectOccasion('Anniversary')">Anniversary</button>
-      <button onclick="selectOccasion('Christmas')">Christmas</button>
       <button onclick="selectOccasion('Custom')">Custom</button>
     </div>
   </div>
+
+  <div id="cardPreview" class="hidden">
+    <h2>Your Greeting Card</h2>
+    <div class="card" id="cardContent"></div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
