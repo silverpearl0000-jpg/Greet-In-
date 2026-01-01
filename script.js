@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const suggestionBox = document.getElementById('suggestionBox');
   const starRating = document.getElementById('starRating');
   const submitFeedback = document.getElementById('submitFeedback');
-  const downloadFeedback = document.getElementById('downloadFeedback');
 
   let appUser = "", occasion = "", recipient = "";
 
@@ -106,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Star rating
+  // ⭐ Star rating
   starRating.addEventListener('click', (e) => {
     if (e.target.tagName !== 'SPAN') return;
     const index = [...starRating.children].indexOf(e.target);
@@ -115,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Submit feedback (localStorage)
+  // 📝 Submit feedback → Google Sheets
   submitFeedback.addEventListener('click', () => {
     const feedback = suggestionBox.value.trim();
     const rating = [...starRating.children].filter(star => star.classList.contains('active')).length;
@@ -130,38 +129,27 @@ document.addEventListener('DOMContentLoaded', () => {
       recipient, 
       occasion, 
       rating, 
-      feedback, 
-      timestamp: new Date().toISOString() 
+      feedback 
     };
 
-    let allFeedback = JSON.parse(localStorage.getItem("greetInFeedback") || "[]");
-    allFeedback.push(payload);
-    localStorage.setItem("greetInFeedback", JSON.stringify(allFeedback));
-
-    alert("Feedback submitted!");
-    suggestionBox.value = '';
-    [...starRating.children].forEach(star => star.classList.remove('active'));
-    feedbackSection.classList.add('hidden');
+    fetch("https://script.google.com/macros/s/AKfycbzmruYQTz0tcaHvdtP7RjJlG_5dsLaaVIyOL9Igc6cE6asoN6k6ChfJ_KHu596pboo/exec", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert("Feedback submitted!");
+      suggestionBox.value = '';
+      [...starRating.children].forEach(star => star.classList.remove('active'));
+      feedbackSection.classList.add('hidden');
+    })
+    .catch(err => {
+      alert("Error submitting feedback: " + err);
+    });
   });
 
-  // Hidden admin-only download
-  downloadFeedback.addEventListener('click', () => {
-    const data = localStorage.getItem("greetInFeedback") || "[]";
-    const blob = new Blob([data], { type: "application/json" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "feedback.json";
-    link.click();
-  });
-
-  // Secret key combo to reveal admin button
-  document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key === 'F') {
-      downloadFeedback.style.display = 'block';
-    }
-  });
-
-  // Party poppers
+  // 🎉 Party poppers
   function launchPoppers() {
     const container = document.getElementById('poppers');
     for (let i = 0; i < 20; i++) {
@@ -175,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Confetti
+  // 🎊 Confetti
   function launchConfetti() {
     const container = document.getElementById('confetti');
     const colors = ['#ff0', '#0f0', '#0ff', '#f0f', '#f00', '#00f'];
