@@ -86,4 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  submitFeedback
+  submitFeedback.addEventListener('click', () => {
+    alert(`Feedback submitted:\n${suggestionBox.value}`);
+    suggestionBox.value = '';
+    feedbackSection.classList.add('hidden');
+    alert('🎉 Thank you for using Greet In!');
+  });
+});
