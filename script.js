@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let appUser = "";
   let occasion = "";
+  let recipient = "";
 
   // Step 1: Onboarding
   onboardBtn.addEventListener('click', () => {
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Step 3: Recipient input + card generation
   generateCardBtn.addEventListener('click', () => {
-    const recipient = recipientNameInput.value.trim();
+    recipient = recipientNameInput.value.trim();
     if (!recipient) {
       alert("Please enter recipient's name!");
       return;
@@ -70,11 +71,28 @@ document.addEventListener('DOMContentLoaded', () => {
     cardContent.textContent = message;
   });
 
-  // Step 4: Download card (placeholder)
+  // Step 4: Download card (PNG/PDF)
   downloadBtn.addEventListener('click', () => {
-    alert(`Card will be downloaded as ${formatSelect.value}`);
-    cardPreview.classList.add('hidden');
-    feedbackSection.classList.remove('hidden');
+    const format = formatSelect.value;
+    const cardElement = document.getElementById('cardContent');
+
+    html2canvas(cardElement).then(canvas => {
+      if (format === "PNG") {
+        const link = document.createElement('a');
+        link.download = "greeting-card.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      } else if (format === "PDF") {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        const imgData = canvas.toDataURL("image/png");
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save("greeting-card.pdf");
+      }
+    });
   });
 
   // Step 5: Feedback & rating
@@ -87,9 +105,35 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   submitFeedback.addEventListener('click', () => {
-    alert(`Feedback submitted:\n${suggestionBox.value}`);
-    suggestionBox.value = '';
-    feedbackSection.classList.add('hidden');
-    alert('🎉 Thank you for using Greet In!');
+    const feedback = suggestionBox.value.trim();
+    const rating = [...starRating.children].filter(star => star.classList.contains('active')).length;
+
+    // Build payload for Google Sheets
+    const payload = {
+      appUser: appUser,
+      recipient: recipient,
+      occasion: occasion,
+      rating: rating,
+      feedback: feedback
+    };
+
+    // Replace with your Google Apps Script Web App URL
+    const scriptURL = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL";
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(res => res.text())
+    .then(data => {
+      alert("Feedback submitted and saved to Google Sheets!");
+      suggestionBox.value = '';
+      feedbackSection.classList.add('hidden');
+      alert('🎉 Thank you for using Greet In!');
+    })
+    .catch(err => {
+      alert("Error saving feedback: " + err);
+    });
   });
 });

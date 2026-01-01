@@ -61,3 +61,19 @@ button:hover { background: #3700b3; }
   from { background-position: 0 0; }
   to { background-position: 100px 100px; }
 }
+
+/* Sticky Disclaimer */
+.disclaimer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #fff;
+  background: #6200ea;
+  padding: 0.75rem 0;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
