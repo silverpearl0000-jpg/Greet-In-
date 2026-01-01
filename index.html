@@ -4,31 +4,24 @@
   <meta charset="UTF-8">
   <title>Greet In</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- External libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Sticky Disclaimer -->
-  <div id="disclaimer">
-    © 2026 Atul Kumar Singh. All rights reserved. Unauthorized use prohibited.
-  </div>
+  <div id="disclaimer">© 2026 Atul Kumar Singh. All rights reserved.</div>
 
-  <!-- Step 1: Onboarding -->
   <section id="onboarding">
     <h1>Welcome to Greet In 🎉</h1>
     <input type="text" id="appUser" placeholder="Enter your name">
     <button id="onboardBtn">Start</button>
   </section>
 
-  <!-- Step 2: Welcome -->
   <section id="welcome" class="hidden">
     <h2 id="welcomeMsg"></h2>
     <button id="occasionBtn">Choose Occasion</button>
   </section>
 
-  <!-- Step 3: Occasion Selection -->
   <section id="occasionSection" class="hidden">
     <h2>Select Occasion</h2>
     <button data-occasion="Birthday">Birthday</button>
@@ -37,14 +30,12 @@
     <button data-occasion="Custom">Custom</button>
   </section>
 
-  <!-- Step 4: Recipient Input -->
   <section id="recipientSection" class="hidden">
     <h2>Enter Recipient</h2>
     <input type="text" id="recipientName" placeholder="Recipient's name">
     <button id="generateCardBtn">Generate Card</button>
   </section>
 
-  <!-- Step 5: Card Preview -->
   <section id="cardPreview" class="hidden">
     <h2>Your Greeting Card</h2>
     <div id="cardContent"></div>
@@ -56,7 +47,6 @@
     <button id="downloadBtn">Download</button>
   </section>
 
-  <!-- Step 6: Feedback Section -->
   <section id="feedbackSection" class="hidden">
     <h2>Feedback</h2>
     <textarea id="suggestionBox" placeholder="Your suggestions..."></textarea>
@@ -66,7 +56,6 @@
     <button id="submitFeedback">Submit Feedback</button>
   </section>
 
-  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>

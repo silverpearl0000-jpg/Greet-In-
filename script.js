@@ -17,23 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const starRating = document.getElementById('starRating');
   const submitFeedback = document.getElementById('submitFeedback');
 
-  let appUser = "";
-  let occasion = "";
-  let recipient = "";
+  let appUser = "", occasion = "", recipient = "";
 
-  // Step 1: Onboarding
   onboardBtn.addEventListener('click', () => {
-    if (!appUserInput.value.trim()) {
-      alert('Please enter your name');
-      return;
-    }
+    if (!appUserInput.value.trim()) { alert('Enter your name'); return; }
     appUser = appUserInput.value.trim();
     document.getElementById('onboarding').classList.add('hidden');
     welcome.classList.remove('hidden');
     welcomeMsg.textContent = `Welcome, ${appUser}! 🎉`;
   });
 
-  // Step 2: Occasion selection
   occasionBtn.addEventListener('click', () => {
     welcome.classList.add('hidden');
     occasionSection.classList.remove('hidden');
@@ -47,42 +40,31 @@ document.addEventListener('DOMContentLoaded', () => {
     recipientSection.classList.remove('hidden');
   });
 
-  // Step 3: Recipient input + card generation
   generateCardBtn.addEventListener('click', () => {
     recipient = recipientNameInput.value.trim();
-    if (!recipient) {
-      alert("Please enter recipient's name!");
-      return;
-    }
-
-    let message = '';
+    if (!recipient) { alert("Enter recipient's name!"); return; }
+    let message = `🎉 Happy ${occasion}, ${recipient}! 🎉`;
     if (occasion === 'New Year') {
       let year = prompt('Select year (2026–4000):');
       message = `🎆 Happy New Year ${year}, ${recipient}! 🎆`;
     } else if (occasion === 'Custom') {
       let fest = prompt('Enter festival name:');
       message = `🎊 Happy ${fest}, ${recipient}! 🎊`;
-    } else {
-      message = `🎉 Happy ${occasion}, ${recipient}! 🎉`;
     }
-
     recipientSection.classList.add('hidden');
     cardPreview.classList.remove('hidden');
     cardContent.textContent = message;
   });
 
-  // Step 4: Download card (PNG/PDF) + show feedback
   downloadBtn.addEventListener('click', () => {
     const format = formatSelect.value;
-    const cardElement = document.getElementById('cardContent');
-
-    html2canvas(cardElement).then(canvas => {
+    html2canvas(cardContent).then(canvas => {
       if (format === "PNG") {
         const link = document.createElement('a');
         link.download = "greeting-card.png";
         link.href = canvas.toDataURL("image/png");
         link.click();
-      } else if (format === "PDF") {
+      } else {
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF();
         const imgData = canvas.toDataURL("image/png");
@@ -92,12 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
         pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         pdf.save("greeting-card.pdf");
       }
-      // 👉 Show feedback section after download
-      feedbackSection.classList.remove('hidden');
+      feedbackSection.classList.remove('hidden'); // show feedback after download
     });
   });
 
-  // Step 5: Feedback & rating
   starRating.addEventListener('click', (e) => {
     if (e.target.tagName !== 'SPAN') return;
     const index = [...starRating.children].indexOf(e.target);
@@ -108,4 +88,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   submitFeedback.addEventListener('click', () => {
     const feedback = suggestionBox.value.trim();
-    const rating = [...starRating.children].filter(star
+    const rating = [...starRating.children].filter(star => star.classList.contains('active')).length;
+    const payload = { appUser, recipient, occasion, rating, feedback };
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwl6qoGclL4wEkw2B1ndi_BeHtp0Q9pmcQ9eDZZ2fRB-I7zv9WREgase6TjBHo4iIQ/exec";
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(res => res.text())
+    .then(() => {
+      alert("Feedback submitted!");
+      suggestionBox.value = '';
+      feedbackSection.classList.add('hidden');
+    })
+    .catch(err => alert("Error: " + err));
+  });
+});
