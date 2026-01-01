@@ -1,9 +1,5 @@
-/* Utility */
-.hidden { 
-  display: none; 
-}
+.hidden { display: none; }
 
-/* Sticky disclaimer */
 #disclaimer {
   position: sticky;
   bottom: 0;
@@ -14,17 +10,11 @@
   font-size: 12px;
 }
 
-/* General section styling */
 section {
   margin: 20px auto;
   max-width: 500px;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
-}
-
-section h1, section h2 {
-  margin-bottom: 12px;
-  color: #333;
 }
 
 input, select, textarea, button {
@@ -41,14 +31,10 @@ button {
   color: #fff;
   border: none;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
-button:hover {
-  background: #45a049;
-}
+button:hover { background: #45a049; }
 
-/* Card preview container */
 #cardContent {
   display: flex;
   justify-content: center;
@@ -56,7 +42,6 @@ button:hover {
   margin: 16px auto;
 }
 
-/* Greeting card styling */
 .greeting-card {
   width: 360px;
   height: 220px;
@@ -84,7 +69,6 @@ button:hover {
   color: #444;
 }
 
-/* Download row */
 .download-row {
   display: flex;
   gap: 8px;
@@ -93,7 +77,6 @@ button:hover {
   margin-top: 10px;
 }
 
-/* Feedback section */
 #feedbackSection {
   margin-top: 20px;
   padding: 15px;
@@ -108,11 +91,8 @@ button:hover {
   margin-bottom: 10px;
   padding: 8px;
   font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
 }
 
-/* Star rating */
 #starRating span {
   font-size: 26px;
   cursor: pointer;
@@ -121,6 +101,4 @@ button:hover {
   margin-right: 4px;
 }
 
-#starRating span.active {
-  color: gold;
-}
+#starRating span.active { color: gold; }
