@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
       feedback: feedback
     };
 
-    // Replace with your Google Apps Script Web App URL
-    const scriptURL = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL";
+    // ✅ Your actual Google Apps Script Web App URL
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwl6qoGclL4wEkw2B1ndi_BeHtp0Q9pmcQ9eDZZ2fRB-I7zv9WREgase6TjBHo4iIQ/exec";
 
     fetch(scriptURL, {
       method: "POST",
