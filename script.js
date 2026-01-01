@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let appUser = "", occasion = "", recipient = "";
 
-  // Onboarding
   onboardBtn.addEventListener('click', () => {
     const name = document.getElementById('appUser').value.trim();
     if (!name) { alert('Enter your name'); return; }
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     welcomeMsg.textContent = `Welcome, ${appUser}! 🎉`;
   });
 
-  // Occasion
   occasionBtn.addEventListener('click', () => {
     welcome.classList.add('hidden');
     occasionSection.classList.remove('hidden');
@@ -43,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     recipientSection.classList.remove('hidden');
   });
 
-  // Card generation
   generateCardBtn.addEventListener('click', () => {
     recipient = recipientNameInput.value.trim();
     if (!recipient) { alert("Enter recipient's name!"); return; }
@@ -71,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   });
 
-  // Download card
   downloadBtn.addEventListener('click', () => {
     const format = formatSelect.value;
     const cardEl = document.getElementById('cardCanvas');
@@ -97,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Star rating
   starRating.addEventListener('click', (e) => {
     if (e.target.tagName !== 'SPAN') return;
     const index = [...starRating.children].indexOf(e.target);
@@ -106,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Submit feedback (silent localStorage save)
   submitFeedback.addEventListener('click', () => {
     const feedback = suggestionBox.value.trim();
     const rating = [...starRating.children].filter(star => star.classList.contains('active')).length;
@@ -125,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
       timestamp: new Date().toISOString() 
     };
 
-    // 👉 Save silently to localStorage
     let allFeedback = JSON.parse(localStorage.getItem("greetInFeedback") || "[]");
     allFeedback.push(payload);
     localStorage.setItem("greetInFeedback", JSON.stringify(allFeedback));
@@ -136,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
     feedbackSection.classList.add('hidden');
   });
 
-  // Hidden admin-only download
   downloadFeedback.addEventListener('click', () => {
     const data = localStorage.getItem("greetInFeedback") || "[]";
     const blob = new Blob([data], { type: "application/json" });
@@ -146,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
     link.click();
   });
 
-  // Secret key combo to reveal admin button
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.shiftKey && e.key === 'F') {
       downloadFeedback.style.display = 'block';
