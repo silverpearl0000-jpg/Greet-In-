@@ -3,82 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <title>Greet In</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- External libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="container">
-    <!-- Step 1: Onboarding -->
-    <section id="onboarding">
-      <h1>🎉 Greeting Card App--> Greet In 🎉</h1>
-      <p>Enter your full name to begin:</p>
-      <input type="text" id="appUser" placeholder="Your full name">
-      <button id="onboardBtn">Continue</button>
-    </section>
-
-    <!-- Step 2: Welcome Animation -->
-    <section id="welcome" class="hidden">
-      <h2 id="welcomeMsg"></h2>
-      <div class="confetti"></div>
-      <button id="occasionBtn">Choose Occasion</button>
-    </section>
-
-    <!-- Step 3: Occasion Selection -->
-    <section id="occasionSection" class="hidden">
-      <h2>Select an Occasion</h2>
-      <div class="grid">
-        <button data-occasion="Birthday">Birthday</button>
-        <button data-occasion="New Year">New Year</button>
-        <button data-occasion="Eid">Eid</button>
-        <button data-occasion="Diwali">Diwali</button>
-        <button data-occasion="Holi">Holi</button>
-        <button data-occasion="Anniversary">Anniversary</button>
-        <button data-occasion="Christmas">Christmas</button>
-        <button data-occasion="Custom">Custom Festival</button>
-      </div>
-    </section>
-
-    <!-- Step 4: Recipient Input -->
-    <section id="recipientSection" class="hidden">
-      <h2>Who is this card for?</h2>
-      <input type="text" id="recipientName" placeholder="Recipient's name">
-      <button id="generateCardBtn">Generate Card</button>
-    </section>
-
-    <!-- Step 5: Greeting Card Preview -->
-    <section id="cardPreview" class="hidden">
-      <h2>Your Greeting Card</h2>
-      <div class="card" id="cardContent"></div>
-      <label>Output format:</label>
-      <select id="formatSelect">
-        <option value="PNG">PNG</option>
-        <option value="PDF">PDF</option>
-      </select>
-      <button id="downloadBtn">Download</button>
-    </section>
-
-    <!-- Step 6: Feedback & Rating -->
-    <section id="feedbackSection" class="hidden">
-      <h2>Share Feedback</h2>
-      <textarea id="suggestionBox" placeholder="Your ideas..."></textarea>
-      <div id="starRating">
-        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-      </div>
-      <button id="submitFeedback">Submit Feedback</button>
-    </section>
-  </main>
-
   <!-- Sticky Disclaimer -->
-  <div class="disclaimer">
-    <strong>
-      This Web App has been developed by Atul Kumar Singh.<br>
-      Unauthorized copying, reuse, or distribution of its tools and code is strictly prohibited without prior legal permission from the certified owner.
-    </strong>
+  <div id="disclaimer">
+    © 2026 Atul Kumar Singh. All rights reserved. Unauthorized use prohibited.
   </div>
 
-  <!-- Libraries for export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="script.js" defer></script>
+  <!-- Step 1: Onboarding -->
+  <section id="onboarding">
+    <h1>Welcome to Greet In 🎉</h1>
+    <input type="text" id="appUser" placeholder="Enter your name">
+    <button id="onboardBtn">Start</button>
+  </section>
+
+  <!-- Step 2: Welcome -->
+  <section id="welcome" class="hidden">
+    <h2 id="welcomeMsg"></h2>
+    <button id="occasionBtn">Choose Occasion</button>
+  </section>
+
+  <!-- Step 3: Occasion Selection -->
+  <section id="occasionSection" class="hidden">
+    <h2>Select Occasion</h2>
+    <button data-occasion="Birthday">Birthday</button>
+    <button data-occasion="Anniversary">Anniversary</button>
+    <button data-occasion="New Year">New Year</button>
+    <button data-occasion="Custom">Custom</button>
+  </section>
+
+  <!-- Step 4: Recipient Input -->
+  <section id="recipientSection" class="hidden">
+    <h2>Enter Recipient</h2>
+    <input type="text" id="recipientName" placeholder="Recipient's name">
+    <button id="generateCardBtn">Generate Card</button>
+  </section>
+
+  <!-- Step 5: Card Preview -->
+  <section id="cardPreview" class="hidden">
+    <h2>Your Greeting Card</h2>
+    <div id="cardContent"></div>
+    <label for="formatSelect">Download format:</label>
+    <select id="formatSelect">
+      <option value="PNG">PNG</option>
+      <option value="PDF">PDF</option>
+    </select>
+    <button id="downloadBtn">Download</button>
+  </section>
+
+  <!-- Step 6: Feedback Section -->
+  <section id="feedbackSection" class="hidden">
+    <h2>Feedback</h2>
+    <textarea id="suggestionBox" placeholder="Your suggestions..."></textarea>
+    <div id="starRating">
+      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+    </div>
+    <button id="submitFeedback">Submit Feedback</button>
+  </section>
+
+  <!-- Script -->
+  <script src="script.js"></script>
 </body>
 </html>

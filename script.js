@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cardContent.textContent = message;
   });
 
-  // Step 4: Download card (PNG/PDF)
+  // Step 4: Download card (PNG/PDF) + show feedback
   downloadBtn.addEventListener('click', () => {
     const format = formatSelect.value;
     const cardElement = document.getElementById('cardContent');
@@ -92,6 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
         pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         pdf.save("greeting-card.pdf");
       }
+      // 👉 Show feedback section after download
+      feedbackSection.classList.remove('hidden');
     });
   });
 
@@ -106,34 +108,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   submitFeedback.addEventListener('click', () => {
     const feedback = suggestionBox.value.trim();
-    const rating = [...starRating.children].filter(star => star.classList.contains('active')).length;
-
-    // Build payload for Google Sheets
-    const payload = {
-      appUser: appUser,
-      recipient: recipient,
-      occasion: occasion,
-      rating: rating,
-      feedback: feedback
-    };
-
-    // ✅ Your actual Google Apps Script Web App URL
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwl6qoGclL4wEkw2B1ndi_BeHtp0Q9pmcQ9eDZZ2fRB-I7zv9WREgase6TjBHo4iIQ/exec";
-
-    fetch(scriptURL, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: { "Content-Type": "application/json" }
-    })
-    .then(res => res.text())
-    .then(data => {
-      alert("Feedback submitted and saved to Google Sheets!");
-      suggestionBox.value = '';
-      feedbackSection.classList.add('hidden');
-      alert('🎉 Thank you for using Greet In!');
-    })
-    .catch(err => {
-      alert("Error saving feedback: " + err);
-    });
-  });
-});
+    const rating = [...starRating.children].filter(star
