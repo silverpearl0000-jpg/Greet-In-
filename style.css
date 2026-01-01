@@ -1,99 +1,52 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hidden { display: none !important; }
-
-#disclaimer {
-  position: sticky;
-  bottom: 0;
-  background: #222;
-  color: #fff;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
   text-align: center;
-  padding: 8px;
-  font-size: 12px;
-  width: 100%;
+  padding: 50px;
 }
 
-section {
-  margin: 20px auto;
-  max-width: 500px;
-  text-align: center;
-  background: rgba(255,255,255,0.85);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+h1, h2 {
+  color: #333;
 }
 
-input, select, textarea, button {
-  font-family: inherit;
-  font-size: 14px;
-  padding: 8px;
-  margin: 6px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+.notice {
+  color: red;
+  font-weight: bold;
+  margin: 20px 0;
 }
 
-button {
-  background: #4CAF50;
-  color: #fff;
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  margin: 10px;
+  font-size: 16px;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
-  transition: transform 0.2s, background 0.3s;
+  transition: 0.3s;
 }
-button:hover { background: #45a049; transform: scale(1.05); }
 
-.greeting-card {
-  width: 360px;
-  height: 220px;
-  border: 3px solid #4CAF50;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-  animation: popIn 0.6s ease forwards;
+.btn-feedback {
+  background: #007bff;
+  color: white;
 }
-.greeting-card h2 { margin: 0 12px 8px; font-size: 22px; color: #2b2b2b; }
-.greeting-card p { margin: 4px 0; font-size: 16px; color: #444; }
 
-.fade-in { animation: fadeIn 0.8s ease forwards; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);} }
-@keyframes popIn { 0% { transform: scale(0.8); opacity: 0;} 80% { transform: scale(1.05); opacity: 1;} 100% { transform: scale(1);} }
-
-#starRating span {
-  font-size: 26px;
-  cursor: pointer;
-  color: #ccc;
-  user-select: none;
-  margin-right: 4px;
-  transition: transform 0.2s, color 0.2s;
+.btn-feedback:hover {
+  background: #0056b3;
 }
-#starRating span.active { color: gold; }
-#starRating span:hover { transform: scale(1.2); color: orange; }
 
-#downloadBtn { animation: pulse 1.5s infinite; }
-@keyframes pulse { 0% { transform: scale(1);} 50% { transform: scale(1.05);} 100% { transform: scale(1);} }
-
-#poppers, #confetti {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 9999;
+.btn-download {
+  background: #28a745;
+  color: white;
 }
-.popper { position: absolute; font-size: 24px; animation: fall 2s ease forwards; }
-@keyframes fall { 0% { transform: translateY(-50px) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
-.confetti-piece { position: absolute; width: 10px; height: 20px; background-color: red; opacity: 0.9; animation: confettiFall 3s ease forwards; }
-@keyframes confettiFall { 0% { transform: translateY(-50px) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+
+.btn-download:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.disclaimer {
+  margin-top: 40px;
+  font-size: 12px;
+  color: #666;
+}

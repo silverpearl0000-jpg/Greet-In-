@@ -3,77 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <title>Greet In</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Libraries for card download -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Sticky disclaimer -->
-  <div id="disclaimer">© 2026 Atul Kumar Singh. All rights reserved.</div>
-
   <!-- Onboarding -->
-  <section id="onboarding">
-    <h1>Welcome to Greet In 🎉</h1>
-    <input type="text" id="appUser" placeholder="Enter your name">
-    <button id="onboardBtn">Start</button>
-  </section>
+  <div id="onboarding">
+    <h1>🎉 Welcome to Greet In 🎉</h1>
+    <p>Select an occasion to create your greeting.</p>
+    <select id="occasionSelect">
+      <option value="">--Choose Occasion--</option>
+      <option value="Birthday">Birthday</option>
+      <option value="Anniversary">Anniversary</option>
+      <option value="Congratulations">Congratulations</option>
+    </select>
+    <button id="startBtn">Start Greeting</button>
+  </div>
 
-  <!-- Welcome -->
-  <section id="welcome" class="hidden">
-    <h2 id="welcomeMsg"></h2>
-    <button id="occasionBtn">Choose Occasion</button>
-  </section>
+  <!-- Greeting Section -->
+  <div id="greetingSection" style="display:none;">
+    <h2 id="greetingTitle"></h2>
+    <p id="greetingMessage"></p>
 
-  <!-- Occasion -->
-  <section id="occasionSection" class="hidden">
-    <h2>Select Occasion</h2>
-    <button data-occasion="Birthday">Birthday</button>
-    <button data-occasion="Anniversary">Anniversary</button>
-    <button data-occasion="New Year">New Year</button>
-    <button data-occasion="Custom">Custom</button>
-  </section>
+    <!-- Feedback Notice -->
+    <p class="notice">⚠️ You must submit feedback to unlock and download your greeting.</p>
 
-  <!-- Recipient -->
-  <section id="recipientSection" class="hidden">
-    <h2>Enter Recipient</h2>
-    <input type="text" id="recipientName" placeholder="Recipient's name">
-    <button id="generateCardBtn">Generate Card</button>
-  </section>
+    <!-- Feedback Button (your actual form link) -->
+    <a href="https://forms.gle/YWt42UUHroJrDs7q7" target="_blank">
+      <button class="btn btn-feedback">Submit Feedback</button>
+    </a>
 
-  <!-- Card Preview -->
-  <section id="cardPreview" class="hidden">
-    <h2>Your Greeting Card</h2>
-    <div id="cardContent"></div>
-    <div class="download-row">
-      <label for="formatSelect">Download format:</label>
-      <select id="formatSelect">
-        <option value="PNG">PNG</option>
-        <option value="PDF">PDF</option>
-      </select>
-      <button id="downloadBtn">Download</button>
-    </div>
-  </section>
+    <!-- Locked Download Button -->
+    <button id="downloadBtn" class="btn btn-download" disabled>
+      Download Greeting
+    </button>
+  </div>
 
-  <!-- Feedback -->
-  <section id="feedbackSection" class="hidden">
-    <h2>Feedback</h2>
-    <textarea id="suggestionBox" placeholder="Your suggestions..."></textarea>
-    <div id="starRating">
-      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-    </div>
-    <button id="submitFeedback">Submit Feedback</button>
-  </section>
+  <!-- Legal Disclaimer -->
+  <footer>
+    <p class="disclaimer">
+      © 2026 Atul. All rights reserved. Unauthorized use or distribution of this app is prohibited.
+    </p>
+  </footer>
 
-  <!-- Hidden admin button -->
-  <button id="downloadFeedback" style="display:none;">Download Feedback</button>
-
-  <!-- Party poppers & confetti containers -->
-  <div id="poppers"></div>
-  <div id="confetti"></div>
-
-  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
