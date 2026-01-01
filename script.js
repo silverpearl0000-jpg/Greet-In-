@@ -72,4 +72,84 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Download card
-  download
+  downloadBtn.addEventListener('click', () => {
+    const format = formatSelect.value;
+    const cardEl = document.getElementById('cardCanvas');
+    if (!cardEl) { alert('No card to download. Generate first.'); return; }
+
+    html2canvas(cardEl).then(canvas => {
+      if (format === "PNG") {
+        const link = document.createElement('a');
+        link.download = "greeting-card.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      } else {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        const imgData = canvas.toDataURL("image/png");
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save("greeting-card.pdf");
+      }
+      feedbackSection.classList.remove('hidden');
+    });
+  });
+
+  // Star rating
+  starRating.addEventListener('click', (e) => {
+    if (e.target.tagName !== 'SPAN') return;
+    const index = [...starRating.children].indexOf(e.target);
+    [...starRating.children].forEach((star, i) => {
+      star.classList.toggle('active', i <= index);
+    });
+  });
+
+  // Submit feedback (silent localStorage save)
+  submitFeedback.addEventListener('click', () => {
+    const feedback = suggestionBox.value.trim();
+    const rating = [...starRating.children].filter(star => star.classList.contains('active')).length;
+
+    if (!rating && !feedback) {
+      alert('Please add a rating or a suggestion.');
+      return;
+    }
+
+    const payload = { 
+      appUser, 
+      recipient, 
+      occasion, 
+      rating, 
+      feedback, 
+      timestamp: new Date().toISOString() 
+    };
+
+    // 👉 Save silently to localStorage
+    let allFeedback = JSON.parse(localStorage.getItem("greetInFeedback") || "[]");
+    allFeedback.push(payload);
+    localStorage.setItem("greetInFeedback", JSON.stringify(allFeedback));
+
+    alert("Feedback submitted!");
+    suggestionBox.value = '';
+    [...starRating.children].forEach(star => star.classList.remove('active'));
+    feedbackSection.classList.add('hidden');
+  });
+
+  // Hidden admin-only download
+  downloadFeedback.addEventListener('click', () => {
+    const data = localStorage.getItem("greetInFeedback") || "[]";
+    const blob = new Blob([data], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "feedback.json";
+    link.click();
+  });
+
+  // Secret key combo to reveal admin button
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'F') {
+      downloadFeedback.style.display = 'block';
+    }
+  });
+});
