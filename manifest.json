@@ -1,11 +1,11 @@
 {
-  "name": "GreetIn",
+  "name": "Greet In",
   "short_name": "GreetIn",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ff69b4",
+  "background_color": "#111111",
+  "theme_color": "#ffcc00",
   "description": "Create personalized greetings with confetti and feedback-locked downloads.",
   "orientation": "portrait",
   "icons": [
@@ -36,6 +36,4 @@
   ],
   "categories": ["productivity", "social"],
   "lang": "en"
-}git add manifest.json
-git commit -m "Dedicated manifest fixes for PWABuilder compliance"
-git push origin main
+}
