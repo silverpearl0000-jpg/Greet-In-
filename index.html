@@ -6,8 +6,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Onboarding -->
-  <div id="onboarding">
+  <!-- Onboarding Card -->
+  <div id="onboarding" class="card">
     <h1>🎉 Welcome to Greet In 🎉</h1>
     <p>Select an occasion to create your greeting.</p>
     <select id="occasionSelect">
@@ -16,25 +16,27 @@
       <option value="Anniversary">Anniversary</option>
       <option value="Congratulations">Congratulations</option>
     </select>
-    <button id="startBtn">Start Greeting</button>
+    <button id="startBtn" class="btn btn-primary">Start Greeting</button>
   </div>
 
   <!-- Greeting Section -->
-  <div id="greetingSection" style="display:none;">
+  <div id="greetingSection" class="card hidden">
     <h2 id="greetingTitle"></h2>
     <p id="greetingMessage"></p>
 
-    <!-- Feedback Notice -->
-    <p class="notice">⚠️ You must submit feedback to unlock and download your greeting.</p>
+    <!-- Feedback Notice Banner -->
+    <div class="notice-banner">
+      ⚠️ You must submit feedback to unlock and download your greeting.
+    </div>
 
-    <!-- Feedback Button (your actual form link) -->
+    <!-- Feedback Button -->
     <a href="https://forms.gle/YWt42UUHroJrDs7q7" target="_blank">
       <button class="btn btn-feedback">Submit Feedback</button>
     </a>
 
     <!-- Locked Download Button -->
     <button id="downloadBtn" class="btn btn-download" disabled>
-      Download Greeting
+      ⬇️ Download Greeting
     </button>
   </div>
 

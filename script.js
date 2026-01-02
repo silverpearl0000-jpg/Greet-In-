@@ -14,7 +14,7 @@ startBtn.addEventListener("click", () => {
 
   greetingTitle.textContent = occasion + " Greeting";
   greetingMessage.textContent = "Wishing you a wonderful " + occasion + "! 🎉✨";
-  greetingSection.style.display = "block";
+  greetingSection.classList.remove("hidden");
 
   // celebratory animation
   confettiBurst();
@@ -26,7 +26,6 @@ downloadBtn.addEventListener("click", function() {
   if (this.disabled) {
     alert("Please submit the feedback form first to unlock the greeting.");
   } else {
-    // If you want auto-unlock via backend, redirect here:
     window.location.href = "https://yourapp.github.io/greeting.html";
   }
 });
@@ -37,7 +36,6 @@ function confettiBurst() {
   const end = Date.now() + duration;
 
   (function frame() {
-    // random confetti burst
     confetti({
       particleCount: 5,
       angle: 60,
