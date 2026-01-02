@@ -21,8 +21,11 @@
   </div>
 
   <div id="greetingSection" class="card hidden">
-    <h2 id="greetingTitle"></h2>
-    <p id="greetingMessage"></p>
+    <!-- Only this part is captured in PNG -->
+    <div id="greetingCard" class="card">
+      <h2 id="greetingTitle"></h2>
+      <p id="greetingMessage"></p>
+    </div>
 
     <div class="notice-banner">
       ⚠️ You must submit feedback to unlock and download your greeting.
@@ -46,9 +49,11 @@
     </p>
   </footer>
 
+  <!-- Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Load script after DOM -->
   <script src="script.js"></script>
 </body>
 </html>
