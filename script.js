@@ -5,7 +5,8 @@ const occasionSelect = document.getElementById("occasionSelect");
 const greetingSection = document.getElementById("greetingSection");
 const greetingTitle = document.getElementById("greetingTitle");
 const greetingMessage = document.getElementById("greetingMessage");
-const downloadBtn = document.getElementById("downloadBtn");
+const downloadPngBtn = document.getElementById("downloadPngBtn");
+const downloadPdfBtn = document.getElementById("downloadPdfBtn");
 
 startBtn.addEventListener("click", () => {
   const senderName = senderNameInput.value.trim();
@@ -52,31 +53,31 @@ window.addEventListener("load", () => {
     const occasion = localStorage.getItem("occasion");
     if (senderName && recipientName && occasion) {
       showGreeting(senderName, recipientName, occasion);
-      downloadBtn.disabled = false;
+      downloadPngBtn.disabled = false;
+      downloadPdfBtn.disabled = false;
     }
   }
 });
 
-// ✅ Updated Download Button Logic
-downloadBtn.addEventListener("click", function() {
+// ✅ Download as PNG
+downloadPngBtn.addEventListener("click", function() {
   if (this.disabled) {
     alert("Please submit the feedback form first to unlock the greeting.");
   } else {
-    window.location.href = "greeting.html"; // now points to your new file
+    html2canvas(document.querySelector("#greetingSection")).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "greeting.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    });
   }
 });
 
-// Confetti animation
-function confettiBurst() {
-  const duration = 2000;
-  const end = Date.now() + duration;
-
-  (function frame() {
-    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 } });
-    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 } });
-
-    if (Date.now() < end) {
-      requestAnimationFrame(frame);
-    }
-  }());
-}
+// ✅ Download as PDF
+downloadPdfBtn.addEventListener("click", function() {
+  if (this.disabled) {
+    alert("Please submit the feedback form first to unlock the greeting.");
+  } else {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.setFontSize(18);
