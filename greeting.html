@@ -26,7 +26,22 @@
 <body>
   <div class="card">
     <h1>🎉 Your Greeting 🎉</h1>
-    <p>This is your personalized greeting card. You can now save or share it!</p>
+    <p id="greetingText"></p>
   </div>
+
+  <script>
+    // Pull sender/recipient/occasion from localStorage
+    const sender = localStorage.getItem("senderName");
+    const recipient = localStorage.getItem("recipientName");
+    const occasion = localStorage.getItem("occasion");
+
+    const greetingText = document.getElementById("greetingText");
+    if (sender && recipient && occasion) {
+      greetingText.textContent =
+        "Dear " + recipient + ", wishing you a wonderful " + occasion + "! 🎉✨\n\nWith love, " + sender;
+    } else {
+      greetingText.textContent = "Greeting details not found. Please go back and create one.";
+    }
+  </script>
 </body>
 </html>

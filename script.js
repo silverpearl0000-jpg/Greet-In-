@@ -57,6 +57,15 @@ window.addEventListener("load", () => {
   }
 });
 
+// ✅ Updated Download Button Logic
+downloadBtn.addEventListener("click", function() {
+  if (this.disabled) {
+    alert("Please submit the feedback form first to unlock the greeting.");
+  } else {
+    window.location.href = "greeting.html"; // now points to your new file
+  }
+});
+
 // Confetti animation
 function confettiBurst() {
   const duration = 2000;
