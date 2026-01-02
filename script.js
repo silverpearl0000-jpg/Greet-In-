@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       occasion = `New Year ${year}`;
     }
 
-    // Save values
+    // Save values for unlock flow
     localStorage.setItem("senderName", senderName);
     localStorage.setItem("recipientName", recipientName);
     localStorage.setItem("occasion", occasion);
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showGreeting(senderName, recipientName, occasion);
   });
 
-  // Show Greeting
+  // Render greeting card
   function showGreeting(senderName, recipientName, occasion) {
     greetingTitle.textContent = `${occasion} Greeting`;
     greetingMessage.textContent =
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     confettiBurst();
   }
 
-  // Confetti Effect
+  // Confetti effect
   function confettiBurst() {
     if (typeof confetti === "function") {
       confetti({
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Unlock logic: check URL for ?unlocked=true
+  // Unlock logic: enable downloads when ?unlocked=true
   const params = new URLSearchParams(window.location.search);
   if (params.get("unlocked") === "true") {
     const senderName = localStorage.getItem("senderName");
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Download as PNG (only greetingCard div)
+  // Download as PNG (only the greeting card)
   downloadPngBtn.addEventListener("click", () => {
     if (downloadPngBtn.disabled) {
       alert("Please submit feedback to unlock downloads.");
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Download as PDF (only greeting text)
+  // Download as PDF (title + message)
   downloadPdfBtn.addEventListener("click", () => {
     if (downloadPdfBtn.disabled) {
       alert("Please submit feedback to unlock downloads.");
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.save("greeting.pdf");
   });
 
-  // PWA service worker registration (optional, for APK via PWABuilder)
+  // Register service worker for PWA (needed for PWABuilder)
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/sw.js")
       .then(() => console.log("Service Worker registered"))

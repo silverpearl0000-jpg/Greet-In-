@@ -8,14 +8,12 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <!-- Onboarding Card -->
   <div id="onboarding" class="card">
     <h1>🎉 Welcome to Greet In 🎉</h1>
     <p>Enter your details to create a personalized greeting.</p>
     <input type="text" id="senderName" placeholder="Enter your name">
     <input type="text" id="recipientName" placeholder="Enter recipient's name">
 
-    <!-- Occasion Dropdown -->
     <select id="occasionSelect">
       <option value="">--Choose Occasion--</option>
       <option value="Birthday">Birthday</option>
@@ -29,7 +27,6 @@
       <option value="Custom">Custom Occasion</option>
     </select>
 
-    <!-- Extra inputs -->
     <div id="customOccasionInput" class="hidden">
       <input type="text" id="customOccasionText" placeholder="Enter your custom occasion">
     </div>
@@ -41,7 +38,6 @@
     <button id="startBtn" class="btn btn-primary">Create Greeting</button>
   </div>
 
-  <!-- Greeting Section -->
   <div id="greetingSection" class="card hidden">
     <div id="greetingCard" class="card">
       <h2 id="greetingTitle"></h2>
@@ -56,21 +52,14 @@
       <button class="btn btn-feedback">Submit Feedback</button>
     </a>
 
-    <button id="downloadPngBtn" class="btn btn-download" disabled>
-      ⬇️ Download as PNG
-    </button>
-    <button id="downloadPdfBtn" class="btn btn-download" disabled>
-      ⬇️ Download as PDF
-    </button>
+    <button id="downloadPngBtn" class="btn btn-download" disabled>⬇️ Download as PNG</button>
+    <button id="downloadPdfBtn" class="btn btn-download" disabled>⬇️ Download as PDF</button>
   </div>
 
   <footer>
-    <p class="disclaimer">
-      © 2026 Atul Kumar Singh. All rights reserved. Unauthorized use or distribution of this app is prohibited.
-    </p>
+    <p class="disclaimer">© 2026 Atul. All rights reserved. Unauthorized use or distribution of this app is prohibited.</p>
   </footer>
 
-  <!-- Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
