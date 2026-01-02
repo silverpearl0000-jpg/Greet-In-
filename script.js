@@ -1,6 +1,4 @@
-// Guard: ensure DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-  // Get DOM elements
   const startBtn = document.getElementById("startBtn");
   const senderNameInput = document.getElementById("senderName");
   const recipientNameInput = document.getElementById("recipientName");
@@ -12,25 +10,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const downloadPdfBtn = document.getElementById("downloadPdfBtn");
   const greetingCard = document.getElementById("greetingCard");
 
-  // Hard guards: if critical elements are missing, stop
-  if (
-    !startBtn || !senderNameInput || !recipientNameInput ||
-    !occasionSelect || !greetingSection || !greetingTitle ||
-    !greetingMessage || !downloadPngBtn || !downloadPdfBtn || !greetingCard
-  ) {
-    console.error("Critical elements missing. Check IDs in index.html.");
-    return;
-  }
+  // Show extra inputs for Custom or New Year
+  occasionSelect.addEventListener("change", () => {
+    const customBox = document.getElementById("customOccasionInput");
+    const newYearBox = document.getElementById("newYearInput");
 
-  // Create Greeting Button Logic
+    if (occasionSelect.value === "Custom") {
+      customBox.classList.remove("hidden");
+      newYearBox.classList.add("hidden");
+    } else if (occasionSelect.value === "NewYear") {
+      newYearBox.classList.remove("hidden");
+      customBox.classList.add("hidden");
+    } else {
+      customBox.classList.add("hidden");
+      newYearBox.classList.add("hidden");
+    }
+  });
+
+  // Create Greeting
   startBtn.addEventListener("click", () => {
     const senderName = senderNameInput.value.trim();
     const recipientName = recipientNameInput.value.trim();
-    const occasion = occasionSelect.value;
+    let occasion = occasionSelect.value;
 
     if (!senderName || !recipientName || !occasion) {
       alert("Please fill in all fields.");
       return;
+    }
+
+    // Handle Custom Occasion
+    if (occasion === "Custom") {
+      const customOccasion = document.getElementById("customOccasionText").value.trim();
+      if (!customOccasion) {
+        alert("Please enter your custom occasion.");
+        return;
+      }
+      occasion = customOccasion;
+    }
+
+    // Handle New Year
+    if (occasion === "NewYear") {
+      const year = document.getElementById("newYearYear").value.trim();
+      if (!year) {
+        alert("Please enter the year for New Year.");
+        return;
+      }
+      occasion = `New Year ${year}`;
     }
 
     // Save values
@@ -54,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function confettiBurst() {
     if (typeof confetti === "function") {
       confetti({
-        particleCount: 100,
+        particleCount: 120,
         spread: 70,
         origin: { y: 0.6 }
       });
@@ -110,9 +135,15 @@ document.addEventListener("DOMContentLoaded", () => {
     doc.setFontSize(18);
     doc.text(greetingTitle.textContent || "", 20, 30);
     doc.setFontSize(14);
-    // Split long text into lines for PDF
     const lines = doc.splitTextToSize(greetingMessage.textContent || "", 170);
     doc.text(lines, 20, 50);
     doc.save("greeting.pdf");
   });
+
+  // PWA service worker registration (optional, for APK via PWABuilder)
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js")
+      .then(() => console.log("Service Worker registered"))
+      .catch((e) => console.warn("SW registration failed:", e));
+  }
 });
