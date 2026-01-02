@@ -8,6 +8,7 @@ const greetingMessage = document.getElementById("greetingMessage");
 const downloadPngBtn = document.getElementById("downloadPngBtn");
 const downloadPdfBtn = document.getElementById("downloadPdfBtn");
 
+// Create Greeting Button Logic
 startBtn.addEventListener("click", () => {
   const senderName = senderNameInput.value.trim();
   const recipientName = recipientNameInput.value.trim();
@@ -27,7 +28,8 @@ startBtn.addEventListener("click", () => {
 
 function showGreeting(senderName, recipientName, occasion) {
   greetingTitle.textContent = `${occasion} Greeting`;
-  greetingMessage.textContent = `Dear ${recipientName},\n\nWishing you a wonderful ${occasion}! 🎉✨\n\nWith love,\n${senderName}`;
+  greetingMessage.textContent =
+    `Dear ${recipientName},\n\nWishing you a wonderful ${occasion}! 🎉✨\n\nWith love,\n${senderName}`;
   greetingSection.classList.remove("hidden");
   confettiBurst();
 }
@@ -40,6 +42,7 @@ function confettiBurst() {
   });
 }
 
+// Unlock logic: check URL for ?unlocked=true
 window.addEventListener("load", () => {
   const params = new URLSearchParams(window.location.search);
   if (params.get("unlocked") === "true") {
@@ -54,6 +57,7 @@ window.addEventListener("load", () => {
   }
 });
 
+// Download as PNG
 downloadPngBtn.addEventListener("click", () => {
   if (downloadPngBtn.disabled) {
     alert("Please submit feedback to unlock downloads.");
@@ -67,6 +71,7 @@ downloadPngBtn.addEventListener("click", () => {
   });
 });
 
+// Download as PDF
 downloadPdfBtn.addEventListener("click", () => {
   if (downloadPdfBtn.disabled) {
     alert("Please submit feedback to unlock downloads.");
