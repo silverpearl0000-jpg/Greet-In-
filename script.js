@@ -40,7 +40,7 @@ function showGreeting(senderName, recipientName, occasion) {
   greetingMessage.textContent =
     "Dear " + recipientName + ",\n\n" +
     "Wishing you a wonderful " + occasion + "! 🎉✨\n\n" +
-    "With love, " + senderName;
+    "With love,\n" + senderName;
   greetingSection.classList.remove("hidden");
   confettiBurst();
 }
@@ -84,6 +84,4 @@ downloadPdfBtn.addEventListener("click", function() {
     doc.setFontSize(18);
     doc.text(greetingTitle.textContent, 20, 30);
     doc.setFontSize(14);
-    doc.text(greetingMessage.textContent, 20, 50);
-    doc.save("greeting.pdf");
-  }
+    doc.text(greetingMessage.textContent, 
