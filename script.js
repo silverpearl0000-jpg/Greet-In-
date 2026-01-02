@@ -1,17 +1,23 @@
-// Occasion selection and greeting display
 const startBtn = document.getElementById("startBtn");
+const senderNameInput = document.getElementById("senderName");
+const recipientNameInput = document.getElementById("recipientName");
 const occasionSelect = document.getElementById("occasionSelect");
-const userNameInput = document.getElementById("userName");
 const greetingSection = document.getElementById("greetingSection");
 const greetingTitle = document.getElementById("greetingTitle");
 const greetingMessage = document.getElementById("greetingMessage");
+const downloadBtn = document.getElementById("downloadBtn");
 
 startBtn.addEventListener("click", () => {
+  const senderName = senderNameInput.value.trim();
+  const recipientName = recipientNameInput.value.trim();
   const occasion = occasionSelect.value;
-  const userName = userNameInput.value.trim();
 
-  if (!userName) {
+  if (!senderName) {
     alert("Please enter your name!");
+    return;
+  }
+  if (!recipientName) {
+    alert("Please enter the recipient's name!");
     return;
   }
   if (!occasion) {
@@ -19,28 +25,35 @@ startBtn.addEventListener("click", () => {
     return;
   }
 
+  // Save to localStorage
+  localStorage.setItem("senderName", senderName);
+  localStorage.setItem("recipientName", recipientName);
+  localStorage.setItem("occasion", occasion);
+
+  showGreeting(senderName, recipientName, occasion);
+});
+
+function showGreeting(senderName, recipientName, occasion) {
   greetingTitle.textContent = occasion + " Greeting";
-  greetingMessage.textContent = "Dear " + userName + ", wishing you a wonderful " + occasion + "! 🎉✨";
+  greetingMessage.textContent =
+    "Dear " + recipientName + ",\n\n" +
+    "Wishing you a wonderful " + occasion + "! 🎉✨\n\n" +
+    "With love, " + senderName;
   greetingSection.classList.remove("hidden");
-
   confettiBurst();
-});
-
-// Download button logic
-const downloadBtn = document.getElementById("downloadBtn");
-downloadBtn.addEventListener("click", function() {
-  if (this.disabled) {
-    alert("Please submit the feedback form first to unlock the greeting.");
-  } else {
-    window.location.href = "https://yourapp.github.io/greeting.html";
-  }
-});
+}
 
 // Unlock logic: check URL for ?unlocked=true
 window.addEventListener("load", () => {
   const params = new URLSearchParams(window.location.search);
   if (params.get("unlocked") === "true") {
-    downloadBtn.disabled = false;
+    const senderName = localStorage.getItem("senderName");
+    const recipientName = localStorage.getItem("recipientName");
+    const occasion = localStorage.getItem("occasion");
+    if (senderName && recipientName && occasion) {
+      showGreeting(senderName, recipientName, occasion);
+      downloadBtn.disabled = false;
+    }
   }
 });
 

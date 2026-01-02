@@ -44,6 +44,17 @@ h1, h2 {
   color: #ffcc00;
 }
 
+/* Inputs */
+input, select {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid #ffcc00;
+  font-size: 16px;
+}
+
 /* Notice banner */
 .notice-banner {
   background: #ffcc00;

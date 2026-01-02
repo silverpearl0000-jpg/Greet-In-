@@ -9,15 +9,16 @@
   <!-- Onboarding Card -->
   <div id="onboarding" class="card">
     <h1>🎉 Welcome to Greet In 🎉</h1>
-    <p>Enter your name and select an occasion to create your greeting.</p>
-    <input type="text" id="userName" placeholder="Enter your name">
+    <p>Enter your details to create a personalized greeting.</p>
+    <input type="text" id="senderName" placeholder="Enter your name">
+    <input type="text" id="recipientName" placeholder="Enter recipient's name">
     <select id="occasionSelect">
       <option value="">--Choose Occasion--</option>
       <option value="Birthday">Birthday</option>
       <option value="Anniversary">Anniversary</option>
       <option value="Congratulations">Congratulations</option>
     </select>
-    <button id="startBtn" class="btn btn-primary">Start Greeting</button>
+    <button id="startBtn" class="btn btn-primary">Create Greeting</button>
   </div>
 
   <!-- Greeting Section -->
@@ -48,6 +49,8 @@
     </p>
   </footer>
 
+  <!-- Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
