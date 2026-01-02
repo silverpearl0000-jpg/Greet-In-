@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Onboarding Card -->
   <div id="onboarding" class="card">
     <h1>🎉 Welcome to Greet In 🎉</h1>
     <p>Enter your details to create a personalized greeting.</p>
@@ -21,22 +20,18 @@
     <button id="startBtn" class="btn btn-primary">Create Greeting</button>
   </div>
 
-  <!-- Greeting Section -->
   <div id="greetingSection" class="card hidden">
     <h2 id="greetingTitle"></h2>
     <p id="greetingMessage"></p>
 
-    <!-- Feedback Notice Banner -->
     <div class="notice-banner">
       ⚠️ You must submit feedback to unlock and download your greeting.
     </div>
 
-    <!-- Feedback Button -->
     <a href="https://forms.gle/YWt42UUHroJrDs7q7" target="_blank">
       <button class="btn btn-feedback">Submit Feedback</button>
     </a>
 
-    <!-- Locked Download Buttons -->
     <button id="downloadPngBtn" class="btn btn-download" disabled>
       ⬇️ Download as PNG
     </button>
@@ -45,14 +40,12 @@
     </button>
   </div>
 
-  <!-- Legal Disclaimer -->
   <footer>
     <p class="disclaimer">
       © 2026 Atul. All rights reserved. Unauthorized use or distribution of this app is prohibited.
     </p>
   </footer>
 
-  <!-- Libraries for PNG/PDF -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

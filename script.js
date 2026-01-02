@@ -8,26 +8,16 @@ const greetingMessage = document.getElementById("greetingMessage");
 const downloadPngBtn = document.getElementById("downloadPngBtn");
 const downloadPdfBtn = document.getElementById("downloadPdfBtn");
 
-// ✅ Create Greeting Button Logic
 startBtn.addEventListener("click", () => {
   const senderName = senderNameInput.value.trim();
   const recipientName = recipientNameInput.value.trim();
   const occasion = occasionSelect.value;
 
-  if (!senderName) {
-    alert("Please enter your name!");
-    return;
-  }
-  if (!recipientName) {
-    alert("Please enter the recipient's name!");
-    return;
-  }
-  if (!occasion) {
-    alert("Please select an occasion!");
+  if (!senderName || !recipientName || !occasion) {
+    alert("Please fill in all fields.");
     return;
   }
 
-  // Save to localStorage
   localStorage.setItem("senderName", senderName);
   localStorage.setItem("recipientName", recipientName);
   localStorage.setItem("occasion", occasion);
@@ -36,16 +26,20 @@ startBtn.addEventListener("click", () => {
 });
 
 function showGreeting(senderName, recipientName, occasion) {
-  greetingTitle.textContent = occasion + " Greeting";
-  greetingMessage.textContent =
-    "Dear " + recipientName + ",\n\n" +
-    "Wishing you a wonderful " + occasion + "! 🎉✨\n\n" +
-    "With love,\n" + senderName;
+  greetingTitle.textContent = `${occasion} Greeting`;
+  greetingMessage.textContent = `Dear ${recipientName},\n\nWishing you a wonderful ${occasion}! 🎉✨\n\nWith love,\n${senderName}`;
   greetingSection.classList.remove("hidden");
   confettiBurst();
 }
 
-// ✅ Unlock logic: check URL for ?unlocked=true
+function confettiBurst() {
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+}
+
 window.addEventListener("load", () => {
   const params = new URLSearchParams(window.location.search);
   if (params.get("unlocked") === "true") {
@@ -60,28 +54,29 @@ window.addEventListener("load", () => {
   }
 });
 
-// ✅ Download as PNG
-downloadPngBtn.addEventListener("click", function() {
-  if (this.disabled) {
-    alert("Please submit the feedback form first to unlock the greeting.");
-  } else {
-    html2canvas(document.querySelector("#greetingSection")).then(canvas => {
-      const link = document.createElement("a");
-      link.download = "greeting.png";
-      link.href = canvas.toDataURL();
-      link.click();
-    });
+downloadPngBtn.addEventListener("click", () => {
+  if (downloadPngBtn.disabled) {
+    alert("Please submit feedback to unlock downloads.");
+    return;
   }
+  html2canvas(greetingSection).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "greeting.png";
+    link.href = canvas.toDataURL();
+    link.click();
+  });
 });
 
-// ✅ Download as PDF
-downloadPdfBtn.addEventListener("click", function() {
-  if (this.disabled) {
-    alert("Please submit the feedback form first to unlock the greeting.");
-  } else {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.setFontSize(18);
-    doc.text(greetingTitle.textContent, 20, 30);
-    doc.setFontSize(14);
-    doc.text(greetingMessage.textContent, 
+downloadPdfBtn.addEventListener("click", () => {
+  if (downloadPdfBtn.disabled) {
+    alert("Please submit feedback to unlock downloads.");
+    return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.setFontSize(18);
+  doc.text(greetingTitle.textContent, 20, 30);
+  doc.setFontSize(14);
+  doc.text(greetingMessage.textContent, 20, 50);
+  doc.save("greeting.pdf");
+});
