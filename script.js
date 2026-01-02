@@ -8,6 +8,7 @@ const greetingMessage = document.getElementById("greetingMessage");
 const downloadPngBtn = document.getElementById("downloadPngBtn");
 const downloadPdfBtn = document.getElementById("downloadPdfBtn");
 
+// ✅ Create Greeting Button Logic
 startBtn.addEventListener("click", () => {
   const senderName = senderNameInput.value.trim();
   const recipientName = recipientNameInput.value.trim();
@@ -44,7 +45,7 @@ function showGreeting(senderName, recipientName, occasion) {
   confettiBurst();
 }
 
-// Unlock logic: check URL for ?unlocked=true
+// ✅ Unlock logic: check URL for ?unlocked=true
 window.addEventListener("load", () => {
   const params = new URLSearchParams(window.location.search);
   if (params.get("unlocked") === "true") {
@@ -81,3 +82,8 @@ downloadPdfBtn.addEventListener("click", function() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     doc.setFontSize(18);
+    doc.text(greetingTitle.textContent, 20, 30);
+    doc.setFontSize(14);
+    doc.text(greetingMessage.textContent, 20, 50);
+    doc.save("greeting.pdf");
+  }
