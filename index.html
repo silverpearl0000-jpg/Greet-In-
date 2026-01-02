@@ -36,9 +36,12 @@
       <button class="btn btn-feedback">Submit Feedback</button>
     </a>
 
-    <!-- Locked Download Button -->
-    <button id="downloadBtn" class="btn btn-download" disabled>
-      ⬇️ Download Greeting
+    <!-- Locked Download Buttons -->
+    <button id="downloadPngBtn" class="btn btn-download" disabled>
+      ⬇️ Download as PNG
+    </button>
+    <button id="downloadPdfBtn" class="btn btn-download" disabled>
+      ⬇️ Download as PDF
     </button>
   </div>
 
@@ -49,8 +52,10 @@
     </p>
   </footer>
 
-  <!-- Confetti library -->
+  <!-- Libraries for PNG/PDF -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
