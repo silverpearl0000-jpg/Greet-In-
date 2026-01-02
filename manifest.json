@@ -1,7 +1,8 @@
 {
   "name": "GreetIn",
   "short_name": "GreetIn",
-  "start_url": "index.html",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ff69b4",
@@ -35,4 +36,6 @@
   ],
   "categories": ["productivity", "social"],
   "lang": "en"
-}
+}git add manifest.json
+git commit -m "Dedicated manifest fixes for PWABuilder compliance"
+git push origin main
