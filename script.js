@@ -1,3 +1,4 @@
+// Get DOM elements
 const startBtn = document.getElementById("startBtn");
 const senderNameInput = document.getElementById("senderName");
 const recipientNameInput = document.getElementById("recipientName");
@@ -8,7 +9,7 @@ const greetingMessage = document.getElementById("greetingMessage");
 const downloadPngBtn = document.getElementById("downloadPngBtn");
 const downloadPdfBtn = document.getElementById("downloadPdfBtn");
 
-// ✅ Button click works
+// ✅ Create Greeting Button Logic
 startBtn.addEventListener("click", () => {
   const senderName = senderNameInput.value.trim();
   const recipientName = recipientNameInput.value.trim();
@@ -19,6 +20,7 @@ startBtn.addEventListener("click", () => {
     return;
   }
 
+  // Save values
   localStorage.setItem("senderName", senderName);
   localStorage.setItem("recipientName", recipientName);
   localStorage.setItem("occasion", occasion);
@@ -26,6 +28,7 @@ startBtn.addEventListener("click", () => {
   showGreeting(senderName, recipientName, occasion);
 });
 
+// ✅ Show Greeting
 function showGreeting(senderName, recipientName, occasion) {
   greetingTitle.textContent = `${occasion} Greeting`;
   greetingMessage.textContent =
@@ -34,6 +37,7 @@ function showGreeting(senderName, recipientName, occasion) {
   confettiBurst();
 }
 
+// ✅ Confetti Effect
 function confettiBurst() {
   confetti({
     particleCount: 100,
@@ -42,7 +46,7 @@ function confettiBurst() {
   });
 }
 
-// ✅ Unlock logic
+// ✅ Unlock logic: check URL for ?unlocked=true
 window.addEventListener("load", () => {
   const params = new URLSearchParams(window.location.search);
   if (params.get("unlocked") === "true") {
@@ -57,13 +61,13 @@ window.addEventListener("load", () => {
   }
 });
 
-// ✅ PNG download
+// ✅ Download as PNG (only greetingCard div)
 downloadPngBtn.addEventListener("click", () => {
   if (downloadPngBtn.disabled) {
     alert("Please submit feedback to unlock downloads.");
     return;
   }
-  html2canvas(greetingSection).then(canvas => {
+  html2canvas(document.querySelector("#greetingCard")).then(canvas => {
     const link = document.createElement("a");
     link.download = "greeting.png";
     link.href = canvas.toDataURL();
@@ -71,7 +75,7 @@ downloadPngBtn.addEventListener("click", () => {
   });
 });
 
-// ✅ PDF download
+// ✅ Download as PDF (only greeting text)
 downloadPdfBtn.addEventListener("click", () => {
   if (downloadPdfBtn.disabled) {
     alert("Please submit feedback to unlock downloads.");
