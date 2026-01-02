@@ -3,6 +3,7 @@
   "short_name": "GreetIn",
   "start_url": "./index.html",
   "scope": "./",
+  "id": "https://silverpearl0000-jpg.github.io/Greet-In-/",
   "display": "standalone",
   "background_color": "#111111",
   "theme_color": "#ffcc00",
